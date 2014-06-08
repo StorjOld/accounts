@@ -4,7 +4,7 @@ import settings
 
 app = flask.Flask(__name__)
 
-def accounts():
+def account_manager():
     a = getattr(flask.g, '_accounts', None)
     if a is None:
         a = flask.g._accounts = accounts.Manager(settings.DATABASE_PATH)
@@ -15,7 +15,7 @@ def authenticate(f):
     def f2(*args, **kwargs):
         api_key = request.headers.get('Authentication', None)
 
-        if not accounts().valid_api_key(api_key):
+        if not account_manager().valid_api_key(api_key):
             return flask.jsonify(status="invalid-authentication"), 401
         else:
             return f(*args, **kwargs)
@@ -26,14 +26,14 @@ def authenticate(f):
 
 @app.route("/accounts/token/new", methods=['POST'])
 def token_new():
-    tm = accounts()
+    tm = account_manager()
 
     return flask.jsonify(token=tm.generate())
 
 
 @app.route("/accounts/token/prices", methods=['GET'])
 def token_prices():
-    tm = accounts()
+    tm = account_manager()
 
     return flask.jsonify(prices=[
         {
@@ -45,14 +45,14 @@ def token_prices():
 
 @app.route("/accounts/token/balance/<token>", methods=['GET'])
 def token_balance(token):
-    tm = accounts()
+    tm = account_manager()
 
     return flask.jsonify(balance=tm.balance(token))
 
 
 @app.route("/accounts/token/redeem/<token>", methods=['POST'])
 def token_redeem(token):
-    tm = accounts()
+    tm = account_manager()
 
     promocode = None if request.json is None else request.json.get('promocode', None)
 
@@ -78,7 +78,7 @@ def token_deposit(token):
 @app.route("/accounts/token/withdraw/<token>", methods=['POST'])
 @authenticate
 def token_withdraw(token):
-    tm = accounts()
+    tm = account_manager()
 
     try:
         byte_amount = int(request.json.get('bytes', None))
@@ -93,7 +93,7 @@ def token_withdraw(token):
 
 @app.route("/accounts/coinbase/success/<api_key>/<int:bytes>", methods=['POST'])
 def coinbase_success(api_key, bytes):
-    tm = accounts()
+    tm = account_manager()
 
     if not tm.api_key.valid_api_key(api_key):
         return flask.jsonify(status="invalid-authentication"), 401
