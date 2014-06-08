@@ -20,6 +20,7 @@ def authenticate(f):
         else:
             return f(*args, **kwargs)
 
+    f2.__name__ = f.__name__
     return f2
 
 
