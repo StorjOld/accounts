@@ -4,6 +4,13 @@ import settings
 
 app = flask.Flask(__name__)
 
+if not app.debug:
+    import logging
+    file_handler = logging.FileHandler('production.log')
+    file_handler.setLevel(logging.WARNING)
+    app.logger.addHandler(file_handler)
+
+
 def account_manager():
     a = getattr(flask.g, '_accounts', None)
     if a is None:
