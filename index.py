@@ -20,7 +20,7 @@ def account_manager():
 
 def authenticate(f):
     def f2(*args, **kwargs):
-        api_key = request.headers.get('Authentication', None)
+        api_key = flask.request.headers.get('Authentication', None)
 
         if not account_manager().valid_api_key(api_key):
             return flask.jsonify(status="invalid-authentication"), 401
@@ -61,7 +61,7 @@ def token_balance(token):
 def token_redeem(token):
     tm = account_manager()
 
-    promocode = None if request.json is None else request.json.get('promocode', None)
+    promocode = None if flask.request.json is None else flask.request.json.get('promocode', None)
 
     if promocode and tm.redeem(token, promocode):
         return flask.jsonify(status="ok"), 201
@@ -73,7 +73,7 @@ def token_redeem(token):
 @authenticate
 def token_deposit(token):
     try:
-        byte_amount = int(request.json.get('bytes', None))
+        byte_amount = int(flask.request.json.get('bytes', None))
     except:
         return flask.jsonify(status="bad-request"), 400
 
@@ -88,7 +88,7 @@ def token_withdraw(token):
     tm = account_manager()
 
     try:
-        byte_amount = int(request.json.get('bytes', None))
+        byte_amount = int(flask.request.json.get('bytes', None))
     except:
         return flask.jsonify(status="bad-request"), 400
 
@@ -107,7 +107,7 @@ def coinbase_success(api_key, bytes):
 
     # Return a bad request if custom param is missing
     try:
-        data = request.json.get('order', None)
+        data = flask.request.json.get('order', None)
         token = data['custom']
     except:
         return flask.jsonify(status="bad-request"), 400
