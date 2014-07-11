@@ -7,3 +7,4 @@ gunicorn==18.0
 itsdangerous==0.24
 psycopg2==2.5.3
 wsgiref==0.1.2
+yoyo-migrations==4.2.4
