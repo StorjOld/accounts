@@ -1,5 +1,5 @@
 
-DATABASE_PATH = "dbname=storj user=storj password=so-secret host=localhost"
+DATABASE_PATH = "postgres://storj:so-secret@localhost/storj"
 
 try:
     from local_settings import *
