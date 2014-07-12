@@ -46,5 +46,5 @@ class Manager():
     def valid_api_key(self, key):
         return self.authentication.valid_api_key(key)
 
-    def add_key(self, key):
-        return self.authentication.add_key(key)
+    def add_api_key(self, key):
+        return self.authentication.add_api_key(key)

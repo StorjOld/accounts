@@ -3,7 +3,7 @@ import settings
 import argparse
 
 def add_key(key):
-    accounts.Manager(settings.DATABASE_PATH).add_key(key)
+    accounts.Manager(settings.DATABASE_PATH).add_api_key(key)
 
 def main():
     parser = argparse.ArgumentParser(
