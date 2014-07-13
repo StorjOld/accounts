@@ -31,6 +31,9 @@ class Manager():
             self.add(token, amount)
             return True
 
+    def add_promocode(self, promocode):
+        return self.promocodes.add_promocode(promocode)
+
     def balance(self, token):
         return self.ledger.balance(token)
 
