@@ -33,16 +33,16 @@ class PromocodeDatabase(object):
         else:
             return None
 
-    def add_promocode(self, promocode):
+    def add_promocode(self, promocode, bytes):
         cursor = self.db.cursor()
         cursor.execute(
             """
                 INSERT INTO promocodes (promocode)
-                SELECT %s
+                SELECT %s, %s
                 WHERE NOT EXISTS (
                     SELECT 1 FROM promocodes
                     WHERE promocode = %s);
             """,
-            [promocode, promocode])
+            [promocode, bytes, promocode])
 
         self.db.commit()
