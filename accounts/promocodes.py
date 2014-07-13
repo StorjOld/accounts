@@ -37,7 +37,7 @@ class PromocodeDatabase(object):
         cursor = self.db.cursor()
         cursor.execute(
             """
-                INSERT INTO promocodes (promocode)
+                INSERT INTO promocodes (promocode, bytes)
                 SELECT %s, %s
                 WHERE NOT EXISTS (
                     SELECT 1 FROM promocodes
