@@ -1,4 +1,4 @@
-import units
+# -*- coding: utf-8 -*-
 
 class Ledger(object):
     def __init__(self, db):
