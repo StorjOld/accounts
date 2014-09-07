@@ -5,7 +5,7 @@ setup(
     version='0.0.1',
     author='Storj Labs',
     author_email='hello@storj.io',
-    packages=['accounts'],
+    packages=['accounts', 'utils'],
     scripts=[],
     url='https://github.com/storj/accounts',
     license='MIT',
