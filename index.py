@@ -72,6 +72,8 @@ def token_redeem(token):
 @app.route("/accounts/token/deposit/<token>", methods=['POST'])
 @authenticate
 def token_deposit(token):
+    tm = account_manager()
+
     try:
         byte_amount = int(flask.request.json.get('bytes', None))
     except:
