@@ -104,7 +104,7 @@ def token_withdraw(token):
 def coinbase_success(api_key, bytes):
     tm = account_manager()
 
-    if not tm.api_key.valid_api_key(api_key):
+    if not tm.valid_api_key(api_key):
         return flask.jsonify(status="invalid-authentication"), 401
 
     # Return a bad request if custom param is missing
