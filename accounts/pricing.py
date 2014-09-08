@@ -26,4 +26,4 @@ class PriceDatabase(object):
         return rows
 
     def convert(self, row):
-        return Price(row['bytes'], row['amount'])
+        return Price(row[1], row[2])

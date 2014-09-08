@@ -10,7 +10,7 @@ class Ledger(object):
 
         row = cursor.fetchone()
 
-        return 0 if row is None else row['amount']
+        return 0 if row is None else row[2]
 
     def deposit(self, token, amount):
         cursor = self.db.cursor()
