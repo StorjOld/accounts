@@ -70,3 +70,7 @@ def db(request):
     request.addfinalizer(close_cur)
 
     return cur
+
+@pytest.fixture
+def patch_urandom(monkeypatch):
+    monkeypatch.setattr('os.urandom', lambda f: 'f' * f)
