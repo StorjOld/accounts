@@ -1,11 +1,4 @@
-import database
-import units
-
-import authentication
-import generator
-import promocodes
-import pricing
-import ledger
+from . import (authentication, database, generator, ledger, promocodes, pricing)
 
 class Manager():
     def __init__(self, database_path):

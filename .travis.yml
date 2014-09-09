@@ -1,7 +1,8 @@
 language: python
 branches:
-  only:
-    - /^feat\/.*$/
+  except:
+    - legacy
+    - experimental
 env:
   - TOXENV=py27
   - TOXENV=py34
