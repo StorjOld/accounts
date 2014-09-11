@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 
-try:
-    import urlparse
-except ImportError:
-    # Python 3 renamed urlparse
-    import urllib.parse as urlparse
-
 import psycopg2
 import psycopg2.extras
+from six.moves.urllib.parse import urlparse
 
 def connect(uri):
-    result = urlparse.urlparse(uri)
+    result = urlparse(uri)
     username = result.username
     password = result.password
     database = result.path[1:]
