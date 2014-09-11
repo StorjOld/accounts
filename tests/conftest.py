@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 """pytest hooks and reusable fixtures"""
-try:
-    from urlparse import urlparse, urlunparse
-except ImportError:
-    # Python 3 renamed urlparse
-    from urllib.parse import urlparse, urlunparse
+from six.moves.urllib.parse import urlparse, urlunparse
 
 import pytest
 import psycopg2
